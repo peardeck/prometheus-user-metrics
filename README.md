@@ -26,7 +26,7 @@ Wow, your super-cool Slack-ops channel can be even more glib about outages... NO
 
 The challenge in monitoring your real users' experiences is that Prometheus can't scrape their clients, so this project adds a service that Prometheus CAN scrape, and provides an API that your clients can PUSH their metrics too. We provide client-side libraries to make that a snap.
 
-![Prometheus User Monitoring Architecture Diagram](/PrometheusUserMonitoringArchitecture?raw=true "Prometheus User Monitoring Architecture")
+![Prometheus User Monitoring Architecture Diagram](/PrometheusUserMonitoringArchitecture.png?raw=true "Prometheus User Monitoring Architecture")
 
 ## How to use it
 
