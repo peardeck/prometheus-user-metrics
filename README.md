@@ -69,3 +69,7 @@ featureButton.on('click', () => {
 Etc! Of course prometheus labels are supported, blah blah.
 
 The client aggregates all the metrics and sends them to the aggregator at an interval of X seconds. The aggregator automatically gains some notion of how many clients are connected with `rate(clientSamples) / X`
+
+## The Future of this Project
+
+Right now this is just a README. If you'd like this to actually exist, please give the repo a star. We'll definitely be building something like this internally, but if it seems widely useful we can use some resources to support this as a long-term open-source project. Thanks!
