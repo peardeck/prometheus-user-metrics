@@ -6,6 +6,7 @@ Prometheus, a [Cloud Native Computing Foundation](https://cncf.io/) project, is 
 
 * Set alarms for spikes in page load times or error rates!
 * Measure real experienced latencies for API calls!
+* You don't control Firebase (insert your favorite third-party "serverless" thing here) but now you can monitor how your users are experiencing it!
 * Understand how much usage a newly-deployed feature is getting!
 * Use alarms as end-to-end tests by getting a slack message when a usage pattern changes dramatically! Automatically warn yourselves if your usage drops from last week - either overall or for a particular feature!
 * No need for third-party services that compromise your users' privacy or security!
@@ -13,14 +14,14 @@ Prometheus, a [Cloud Native Computing Foundation](https://cncf.io/) project, is 
 
 ## Pictures You Can Use to Impress Your Friends
 
-Github's Frontend Response Time Graph is a snap!
-![Github's Frontend Response Time Graph](https://cloud.githubusercontent.com/assets/187987/7738101/d9892654-ff05-11e4-8d62-340091dada79.png)
+Github's Frontend Response Time Graph is a snap! We can literally generate this graph for you AND let you set alarms on it without any manual instrumentation on your part. See https://githubengineering.com/browser-monitoring-for-github-com/ for how Github uses these metrics.
 
-Any of these super-cool Grafana defaults could be yours!
-![Grafana demo](http://grafana.org/assets/img/features/dashboard_ex1.png)
+![Github's Frontend Response Time Graph](https://cloud.githubusercontent.com/assets/187987/7738101/d9892654-ff05-11e4-8d62-340091dada79.png)
 
 Wow, your super-cool Slack-ops channel can be even more glib about outages... NOW FOR THE END USER!
 ![Slack Ops](/SweetSlackOps.png?raw=true "Your users can't get their S3 photos, but your monitoring is pretty cool!")
+
+You don't control Firebase (insert your third-party "serverless" thing here) but now you can monitor how your users are experiencing it!
 
 ## How it works
 
