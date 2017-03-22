@@ -17,22 +17,38 @@
 </head>
 
 <body>
-    <h1>Super-simple demo</h1>
+    <h1>Super-simple demo (open in multiple tabs)</h1>
     <ol>
-        <li>Click <button id='simulateUsage'>Simulate Usage</button> to simulate some client-side behavior</li>
-        <li>Wait about 20s and then click "Execute" below (actually I just pound Execute until the change shows up)</li>
+        <li>Simulate some client-side behavior
+            <p>
+                <button id='simulateQuickQuestion'>Use 'Quick Question'</button>
+                <button id='simulateBlockStudent'>Use 'Block Student'</button>
+                <button id='simulateShowContent'>Use 'Show Content'</button>
+                <button id='simulateFirebase'>Observe a random firebase ping time</button>
+            </p>
+            <p>
+                (or just refresh this page a bunch. Make sure you wait 10s for stats to be recorded before refreshing again).
+        </li>
+        <li>You should see activity show up below in under 20s.</li>
     </ol>
 
+    <iframe src="http://localhost:3001/dashboard/db/demo-dashboard" width="90%" height="800" frameborder="0"></iframe>
     
-    <iframe src="http://localhost:9090/graph?g0.range_input=5m&g0.expr=usage_total&g0.tab=0" style="position: absolute; left: 5%; top: 30%; width: 90%; height: 70%">
-    </iframe>
     <script>
 
-        document.getElementById('simulateUsage').addEventListener('click', () => {
-            prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
-            prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
-            prometheusAggregator('increment', 'usage_total', { browser: 'safari', feature: 'quickQuestion' }, 1);
+        document.getElementById('simulateQuickQuestion').addEventListener('click', () => {
+                prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
+        });
 
+        document.getElementById('simulateBlockStudent').addEventListener('click', () => {
+                prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'blockStudent' }, 1);
+        });
+
+        document.getElementById('simulateShowContent').addEventListener('click', () => {
+                prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'showContent' }, 1);
+        });
+
+        document.getElementById('simulateFirebase').addEventListener('click', () => {
             prometheusAggregator('observe', 'firebase_response_time', { firebaseHost: 'pd-dev-1.firebaseio.com'}, Math.random());
         });
     </script>

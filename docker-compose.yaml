@@ -41,6 +41,20 @@ services:
     links:
       - dev-server:metrics-aggregator-dev-server
 
+  demo-grafana:
+    image: grafana/grafana
+    ports:
+      - 3001:3000
+    volumes:
+      - ./demo/grafanaConfig:/grafana-data
+    links:
+      - demo-prom
+    environment:
+      GF_AUTH_BASIC_ENABLED: "false"
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+      GF_PATHS_DATA: /grafana-data
+
   # This server actually serves the demo code
   sample-web-server:
     image: nginx
