@@ -87,9 +87,27 @@
         };
     }
 
+    function reportNavigationTiming() {
+        if (!performance || !performance.timing) {
+            console.log("performance.timing not supported");
+            return;
+        }
+
+        var navigationStart = performance.timing.navigationStart;
+        const prometheusAggregator = window[window['PrometheusAggregatorObjectName']];
+        var key;
+        for (key in performance.timing) {
+            if (typeof performance.timing[key] === 'number' && performance.timing[key] > 0) {
+                prometheusAggregator('observe', 'performance_timing_' + key, {}, (performance.timing[key] - navigationStart) / 1000.0);
+            }
+        }
+    }
+
     const { q, aggregatorServerRoot } = window[window['PrometheusAggregatorObjectName']];
 
     const actualFunction = window[window['PrometheusAggregatorObjectName']] = setUpAndStartInterval({ aggregatorReportingUrl: aggregatorServerRoot + '/record' });
 
     (q || []).forEach((args) => actualFunction(...args));
+
+    reportNavigationTiming();
 }());
