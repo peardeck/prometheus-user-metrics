@@ -1,0 +1,42 @@
+version: "2"
+services:
+  dev-server:
+    build:
+      context: .
+      dockerfile: Dockerfile-dev
+    command:
+      - bash 
+      - runDevServer.sh 
+    ports:
+      - 3000:3000
+      - 9102:9102
+    environment:
+      PUM_CONFIG_PATH: /stage/metricConfigs
+    volumes:
+      - ./serverSrc:/stage/serverSrc
+      - ./clientSrc:/stage/clientSrc
+      - ./config/metricConfigs:/stage/metricConfigs
+
+  prod-server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+      # Note: in production you should not expose port 9102. It is exposed here just to make it easier to manually verify GET :9102/metrics
+      - 9102:9102
+    environment:
+      PUM_CONFIG_PATH: /stage/metricConfigs
+    volumes:
+      - ./config/metricConfigs:/stage/metricConfigs
+
+  demo-prom:
+    image: prom/prometheus
+    command:
+      - -config.file=/prometheusConfig/prometheus.yml
+    ports:
+      - 9090:9090
+    volumes:
+      - ./demo/prometheusConfig:/prometheusConfig
+    links:
+      - dev-server:metrics-aggregator-dev-server

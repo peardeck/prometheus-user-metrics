@@ -1,0 +1,34 @@
+<html>
+
+<head>
+    <script>
+
+        // copied from Google Analytics Snippet, adapted for Prometheus Aggregator
+        (function(i,s,o,g,r,a,m){i['PrometheusAggregatorObjectName']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=(g+'/static/aggregatorClient.js');m.parentNode.insertBefore(a,m);
+        i[r].aggregatorServerRoot = g;
+        })(window,document,'script','http://localhost:3000','prometheusAggregator');
+
+        prometheusAggregator('increment', 'app_load_succeeded', { app: 'student'}, 1);
+
+    </script>
+
+</head>
+
+<body>
+    <button id='sendMetrics'>Send Metrics</button>
+
+    <script>
+
+        document.getElementById('sendMetrics').addEventListener('click', () => {
+            prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
+            prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
+            prometheusAggregator('increment', 'usage_total', { browser: 'safari', feature: 'quickQuestion' }, 1);
+
+            prometheusAggregator('observe', 'firebase_response_time', { firebaseHost: 'pd-dev-1.firebaseio.com'}, Math.random());
+        });
+    </script>
+</body>
+
+</html>

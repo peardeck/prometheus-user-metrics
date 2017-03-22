@@ -1,0 +1,13 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+# rule_files:
+#   - /etc/config/rules
+#   - /etc/config/alerts
+
+scrape_configs:
+  - job_name: metrics-aggregator
+    static_configs:
+      - targets:
+        - metrics-aggregator-dev-server:9102
