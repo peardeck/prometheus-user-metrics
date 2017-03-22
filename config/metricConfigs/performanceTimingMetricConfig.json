@@ -1,0 +1,327 @@
+{
+    "allowedMetrics": [
+        {
+            "name": "performance_timing_navigationStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_unloadEventStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_unloadEventEnd",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_fetchStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domainLookupStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domainLookupEnd",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_connectStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_connectEnd",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_requestStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_responseStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_responseEnd",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domLoading",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domInteractive",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domContentLoadedEventStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domContentLoadedEventEnd",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_domComplete",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        },
+        {
+            "name": "performance_timing_loadEventStart",
+            "help": "Performance timing metric",
+            "type": "histogram",
+            "labels": [],
+            "buckets": [
+                0.01,
+                0.05,
+                0.1,
+                0.2,
+                0.5,
+                1,
+                1.2,
+                1.5,
+                2,
+                5,
+                10
+            ]
+        }
+    ]
+}

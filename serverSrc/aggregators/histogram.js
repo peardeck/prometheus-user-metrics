@@ -23,12 +23,16 @@ function addObservation(aggregate: HistogramObservationAggregate, newObservation
 
 function printObservationAggregate(metricName: string, labelPermutationKey: string, aggregate: HistogramObservationAggregate) {
     const leKeys = Object.keys(aggregate.buckets).sort((a, b) => Number(a) < Number(b) ? -1 : 1);
+    const labelStringPrefix = labelPermutationKey.length > 0
+        ? `${labelPermutationKey},` // stick labels in front of new `le` label with a comma
+        : '';                       // no labels, no comma.
+
     const bucketLines = leKeys.map((bucketLimit) => {
-        return `${metricName}_bucket{${labelPermutationKey},le="${bucketLimit}"} ${aggregate.buckets[bucketLimit]}`;
+        return `${metricName}_bucket{${labelStringPrefix}le="${bucketLimit}"} ${aggregate.buckets[bucketLimit]}`;
     });
 
     return bucketLines.join('\n') + '\n' +
-    `${metricName}_bucket{${labelPermutationKey},le="+Inf"} ${aggregate.count}` + '\n' + 
+    `${metricName}_bucket{${labelStringPrefix}le="+Inf"} ${aggregate.count}` + '\n' + 
     `${metricName}_sum{${labelPermutationKey}} ${aggregate.sum}` + '\n' +
     `${metricName}_count{${labelPermutationKey}} ${aggregate.count}`;
 }

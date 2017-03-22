@@ -24,6 +24,9 @@ Github's Frontend Response Time Graph is a snap! We can literally generate this 
 
 ![Github's Frontend Response Time Graph](https://cloud.githubusercontent.com/assets/187987/7738101/d9892654-ff05-11e4-8d62-340091dada79.png)
 
+Here's how the demo for this project loads the same graph:
+![The graph from this project](/navigationtiming.png?raw=true)
+
 Wow, your super-cool Slack-ops channel can be even more glib about outages... NOW FOR THE END USER!
 ![Slack Ops](/SweetSlackOps.png?raw=true "Your users can't get their S3 photos, but your monitoring is pretty cool!")
 
