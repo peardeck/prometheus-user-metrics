@@ -17,11 +17,18 @@
 </head>
 
 <body>
-    <button id='sendMetrics'>Send Metrics</button>
+    <h1>Super-simple demo</h1>
+    <ol>
+        <li>Click <button id='simulateUsage'>Simulate Usage</button> to simulate some client-side behavior</li>
+        <li>Wait about 20s and then click "Execute" below (actually I just pound Execute until the change shows up)</li>
+    </ol>
 
+    
+    <iframe src="http://localhost:9090/graph?g0.range_input=5m&g0.expr=usage_total&g0.tab=0" style="position: absolute; left: 5%; top: 30%; width: 90%; height: 70%">
+    </iframe>
     <script>
 
-        document.getElementById('sendMetrics').addEventListener('click', () => {
+        document.getElementById('simulateUsage').addEventListener('click', () => {
             prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
             prometheusAggregator('increment', 'usage_total', { browser: 'chrome', feature: 'quickQuestion' }, 1);
             prometheusAggregator('increment', 'usage_total', { browser: 'safari', feature: 'quickQuestion' }, 1);

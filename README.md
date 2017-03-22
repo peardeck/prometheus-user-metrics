@@ -12,6 +12,12 @@ Prometheus, a [Cloud Native Computing Foundation](https://cncf.io/) project, is 
 * No need for third-party services that compromise your users' privacy or security!
 * Easy to set up and cheap to run!
 
+## Try it locally!
+
+1. Clone repo
+2. `docker-compose up`
+3. Browse to http://localhost:8080/demo.html
+
 ## Pictures You Can Use to Impress Your Friends
 
 Github's Frontend Response Time Graph is a snap! We can literally generate this graph for you AND let you set alarms on it without any manual instrumentation on your part. See https://githubengineering.com/browser-monitoring-for-github-com/ for how Github uses these metrics.

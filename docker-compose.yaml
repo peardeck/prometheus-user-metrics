@@ -17,18 +17,18 @@ services:
       - ./clientSrc:/stage/clientSrc
       - ./config/metricConfigs:/stage/metricConfigs
 
-  prod-server:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-      # Note: in production you should not expose port 9102. It is exposed here just to make it easier to manually verify GET :9102/metrics
-      - 9102:9102
-    environment:
-      PUM_CONFIG_PATH: /stage/metricConfigs
-    volumes:
-      - ./config/metricConfigs:/stage/metricConfigs
+  # prod-server:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #     # Note: in production you should not expose port 9102. It is exposed here just to make it easier to manually verify GET :9102/metrics
+  #     - 9102:9102
+  #   environment:
+  #     PUM_CONFIG_PATH: /stage/metricConfigs
+  #   volumes:
+  #     - ./config/metricConfigs:/stage/metricConfigs
 
   demo-prom:
     image: prom/prometheus
@@ -40,3 +40,11 @@ services:
       - ./demo/prometheusConfig:/prometheusConfig
     links:
       - dev-server:metrics-aggregator-dev-server
+
+  # This server actually serves the demo code
+  sample-web-server:
+    image: nginx
+    ports: 
+      - 8080:80
+    volumes:
+      - ./demo:/usr/share/nginx/html:ro
