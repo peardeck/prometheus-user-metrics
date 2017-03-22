@@ -16,7 +16,7 @@ Prometheus, a [Cloud Native Computing Foundation](https://cncf.io/) project, is 
 
 1. Clone repo
 2. `docker-compose up`
-3. Browse to http://localhost:8080/demo.html
+3. Browse to http://localhost:8080
 
 ## Pictures You Can Use to Impress Your Friends
 

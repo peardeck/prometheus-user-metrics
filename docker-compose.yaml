@@ -61,4 +61,4 @@ services:
     ports: 
       - 8080:80
     volumes:
-      - ./demo:/usr/share/nginx/html:ro
+      - ./demo/sampleApp:/usr/share/nginx/html:ro
