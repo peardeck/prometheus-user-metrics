@@ -1,3 +1,8 @@
+/*
+ (c) 2017 Pear Deck, Inc.
+ License: Apache 2
+*/
+
 (function () {
     function post(url, data) {
         var req = new XMLHttpRequest();
