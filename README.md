@@ -50,35 +50,40 @@ The challenge in monitoring your real users' experiences is that Prometheus can'
 
 ### Client-side (JS)
 
-1. EZ-setup: just add a script tag
-`<script src='http://localhost:3000/prometheusUserMonitoringClient.js'></script>`
+1. EZ-setup: just add this snippet to your HTML:
 
-That's it! It's already collecting enough metrics to do github's user monitoring in the Sweet Graph above. If you want to collect more metrics like:
-
-2. Average latency to API
 ```
-const histogram = prometheusUserMonitoringClient.makeHistogram("my_api_histogram");
-
-const startTime = Date.now();
-makeApiCall().then(() => {
-    histogram.observe(Date.now() - startTime);
-});
+// copied from Google Analytics Snippet, adapted for Prometheus Aggregator
+(function(i,s,o,g,r,a,m){i['PrometheusAggregatorObjectName']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=(g+'/static/aggregatorClient.js');m.parentNode.insertBefore(a,m);
+i[r].aggregatorServerRoot = g;
+})(window,document,'script','http://localhost:3000','prometheusAggregator');
 ```
 
-3. How many users are using the new feature we launched?
-```
-const counter = prometheusUserMonitoringClient.makeCounter("feature_x_usage_total");
 
+That's it! It's already collecting enough metrics to do github's user monitoring in the Sweet Graph above. If you want to collect custom metrics, then you'd need to add them to a whitelist. Once you have that set up (it's just a [config file](/config/metricConfigs/appMetricConfig.json)), then you can monitor metrics like: 
+
+1. How much does this page get loaded?
+```
+prometheusAggregator('increment', 'app_load_succeeded', { app: 'whateverAppId'}, 1);
+```
+
+2. How many users are using the new feature we launched?
+```
 featureButton.on('click', () => {
     doFeatureX();
-    counter.increment();
+    prometheusAggregator('increment', 'feature_usage_total', { feature: 'whateverFeatureName'}, 1);
 });
 ```
 
-Etc! Of course prometheus labels are supported, blah blah.
+3. TODO: What's the average latency to a third-party service like firebase?
+```
+prometheusAggregator('observe', 'firebase_latency', { firebaseHost: 'whatever.firebaseio.com' }, measuredLatency)
+```
 
 The client aggregates all the metrics and sends them to the aggregator at an interval of X seconds. The aggregator automatically gains some notion of how many clients are connected with `rate(clientSamples) / X`
 
 ## The Future of this Project
 
-Right now this is just a README. If you'd like this to actually exist, please give the repo a star. We'll definitely be building something like this internally, but if it seems widely useful we can use some resources to support this as a long-term open-source project. Thanks!
+We use this in production at Pear Deck and it's pretty great. We don't know how widely applicable it is. Let us know by leaving an issue or starring the project! You can also email us at hello@peardeck.com.
