@@ -62,6 +62,7 @@ readMetricConfigs().then((metricConfigs) => {
     // expose this server to prometheus so it can scrape /metrics 
     const reportingServer = express();
     reportingServer.get('/metrics', (req, res, next) => {
+        res.set('Content-Type', 'text/plain; version=0.0.4; charset=utf-8');
         res.send(aggregator.reportMetrics());
     });
 
