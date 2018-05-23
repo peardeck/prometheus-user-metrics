@@ -1,0 +1,31 @@
+{
+  "cluster": "${CLUSTER}",
+  "servicePort": 3000,
+  "serviceProtocol": "HTTP",
+  "desiredCount": ${DESIRED_COUNT},
+  "containers": [
+    {
+      "containerName": "${SERVICE}",
+      "containerImage": "${CONTAINER_IMAGE}",
+      "containerTag": "${CIRCLE_SHA1}",
+      "containerPort": 3000,
+      "memoryReservation": 256,
+      "essential": true
+    }
+  ],
+  "healthCheck": {
+    "healthyThreshold": 3,
+    "unhealthyThreshold": 5,
+    "path": "/status",
+    "interval": 20,
+    "matcher": "200"
+  },
+  "ruleConditions": [
+    {
+      "hostname": "prometheus-aggregator",
+      "listeners": [
+        "https"
+      ]
+    }
+  ]
+}

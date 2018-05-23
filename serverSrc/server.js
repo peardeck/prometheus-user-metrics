@@ -24,6 +24,10 @@ readMetricConfigs().then((metricConfigs) => {
 
     publicServer.use('/static', express.static('/stage/static'));
 
+    publicServer.get('/status', (req, res) => {
+        return res.status(200).send();
+    });
+
     publicServer.use(bodyParser.json());
     publicServer.post('/record', (req, res, next) => {
         const batch = req.body;

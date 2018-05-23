@@ -1,0 +1,76 @@
+version: 2
+jobs:
+  build:
+    environment:
+      SERVICE: prometheus-aggregator
+    docker:
+      - image: ${STAGING_ECR_URL}/docker-deploy
+        aws_auth: &ecr_credentials
+          aws_access_key_id: $STAGING_AWS_ACCESS_KEY_ID
+          aws_secret_access_key: $STAGING_AWS_SECRET_ACCESS_KEY
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build application docker image
+          command: |
+            docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${STAGING_ECR_URL}/${SERVICE}:${CIRCLE_SHA1} .
+      - run:
+          name: Push image
+          command: |
+            ENVIRONMENT=staging DOCKER_IMAGE="${STAGING_ECR_URL}/${SERVICE}" TAG=${CIRCLE_SHA1} /docker-push.sh
+  deploy:
+    environment:
+      SERVICE: prometheus-aggregator
+      CONTAINER_IMAGE: prometheus-aggregator
+      ENVIRONMENT: staging
+      DESIRED_COUNT: "1"
+      CLUSTER: datacamp-services
+    docker:
+      - image: ${STAGING_ECR_URL}/docker-deploy
+        aws_auth: *ecr_credentials
+    steps:
+      - checkout
+      - deploy:
+          name: Deploy
+          command: |
+            /ecs-deploy.sh
+  deploy-to-prod:
+    environment:
+      SERVICE: prometheus-aggregator
+      CONTAINER_IMAGE: prometheus-aggregator
+      ENVIRONMENT: prod
+      DESIRED_COUNT: "2"
+      CLUSTER: datacamp-services
+    docker:
+      - image: ${STAGING_ECR_URL}/docker-deploy
+        aws_auth: *ecr_credentials
+    steps:
+      - checkout
+      - setup_remote_docker
+      - deploy:
+          name: Deploy to prod
+          command: |
+            DOCKER_IMAGE="${PROD_ECR_URL}/${SERVICE}" TAG=${CIRCLE_SHA1} /docker-push.sh
+            /ecs-deploy.sh
+workflows:
+  version: 2
+  build_test_deploy:
+    jobs:
+      - build:
+          context: org-global
+      - deploy:
+          context: org-global
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-to-prod:
+          context: org-global
+          filters:
+            tags:
+              only: /^release-.*/
+            branches:
+              ignore: /.*/

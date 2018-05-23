@@ -12,6 +12,13 @@ RUN npm install -g babel-register
 
 WORKDIR /stage
 
+EXPOSE 9102
+
+LABEL "com.datadoghq.ad.check_names"='["prometheus"]'
+LABEL "com.datadoghq.ad.init_configs"='[{}]'
+LABEL "com.datadoghq.ad.instances"='[{"prometheus_url": "http://%%host%%:9102/metrics", "namespace": "demo", "metrics": ["nodejs*"]}]'
+LABEL "com.datadoghq.ad.logs"='[{}]'
+
 RUN npm install babel-plugin-syntax-async-functions 
 RUN npm install babel-plugin-transform-builtin-extend 
 RUN npm install babel-plugin-transform-flow-strip-types 
