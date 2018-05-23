@@ -1,5 +1,10 @@
 FROM node:6
 
+# aws env
+RUN curl -o /tmp/aws-env-linux-amd64 -L https://github.com/datacamp/aws-env/releases/download/v0.1-session-fix/aws-env-linux-amd64 && \
+  chmod +x /tmp/aws-env-linux-amd64 && \
+  mv /tmp/aws-env-linux-amd64 /bin/aws-env
+
 RUN apt-get update && apt-get install -y libelf-dev python-all libicu-dev
 RUN node --version
 RUN npm --version
@@ -35,6 +40,7 @@ RUN npm install
 
 RUN mkdir /stage/static
 RUN mkdir /stage/built
+RUN mkdir /stage/metricConfigs
 
 # Build the server and put it in /stage/built
 COPY ./serverSrc /stage/serverSrc
@@ -44,5 +50,7 @@ RUN babel --out-dir /stage/built /stage/serverSrc
 COPY ./clientSrc /stage/clientSrc
 RUN babel --out-file /stage/static/aggregatorClient.js /stage/clientSrc/aggregatorClient.js
 
+COPY ./config/metricConfigs /stage/metricConfigs
+
 WORKDIR /stage/built
-CMD ["node", "server.js"]
+CMD ["bash", "-c", "eval $(aws-env) && node server.js"]
