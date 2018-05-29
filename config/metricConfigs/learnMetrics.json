@@ -1,7 +1,7 @@
 {
   "allowedMetrics": [
       {
-          "name": "count_crashed_sessions",
+          "name": "le_count_crashed_sessions",
           "help": "Count the number of sessions that crashed",
           "type": "counter",
           "labels": [
@@ -21,7 +21,7 @@
           ]
       },
       {
-          "name": "time_workspace_to_be_ready",
+          "name": "le_time_workspace_to_be_ready",
           "help": "measures the time to get the workspace ready for a user",
           "type": "histogram",
           "labels": [
@@ -66,7 +66,7 @@
           ]
       },
       {
-          "name": "time_to_submit_code",
+          "name": "le_time_to_submit_code",
           "help": "measures the time to submit a code and get the response",
           "type": "histogram",
           "labels": [
@@ -111,7 +111,7 @@
           ]
       },
       {
-          "name": "count_report_sent",
+          "name": "le_count_report_sent",
           "help": "Count the number of reports reported",
           "type": "counter",
           "labels": [
