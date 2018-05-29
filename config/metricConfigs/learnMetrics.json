@@ -42,7 +42,28 @@
                 "name": "language",
                 "allowedValues": ["r", "revo", "sql", "python", "shell"]
             }
-        ]
+          ],
+          "buckets": [
+            0.01,
+            0.1,
+            0.3,
+            0.5,
+            0.7,
+            1,
+            1.5,
+            2,
+            3,
+            4,
+            5,
+            7,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            60
+          ]
       },
       {
           "name": "time_to_submit_code",
@@ -66,7 +87,28 @@
                 "name": "language",
                 "allowedValues": ["r", "revo", "sql", "python", "shell"]
             }
-        ]
+          ],
+          "buckets": [
+            0.01,
+            0.1,
+            0.3,
+            0.5,
+            0.7,
+            1,
+            1.5,
+            2,
+            3,
+            4,
+            5,
+            7,
+            10,
+            15,
+            20,
+            25,
+            30,
+            40,
+            60
+          ]
       },
       {
           "name": "count_report_sent",
