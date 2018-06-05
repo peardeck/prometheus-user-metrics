@@ -10,7 +10,13 @@
       "containerTag": "${CIRCLE_SHA1}",
       "containerPort": 3000,
       "memoryReservation": 256,
-      "essential": true
+      "essential": true,
+      "dockerLabels": {
+        "com.datadoghq.ad.check_names": "[\"prometheus\"]",
+        "com.datadoghq.ad.init_configs": "[{}]",
+        "com.datadoghq.ad.instances": "[{\"prometheus_url\": \"http://%%host%%:9102/metrics\", \"namespace\": \"user_metrics\", \"metrics\": [\"*\"], \"send_histograms_buckets\": true}]",
+        "com.datadoghq.ad.logs": "[{}]"
+      }
     }
   ],
   "healthCheck": {
