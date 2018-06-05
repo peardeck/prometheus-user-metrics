@@ -19,11 +19,6 @@ WORKDIR /stage
 
 EXPOSE 9102
 
-LABEL "com.datadoghq.ad.check_names"='["prometheus"]'
-LABEL "com.datadoghq.ad.init_configs"='[{}]'
-LABEL "com.datadoghq.ad.instances"='[{"prometheus_url": "http://%%host%%:9102/metrics", "namespace": "user_metrics", "metrics": ["*"]}]'
-LABEL "com.datadoghq.ad.logs"='[{}]'
-
 RUN npm install babel-plugin-syntax-async-functions 
 RUN npm install babel-plugin-transform-builtin-extend 
 RUN npm install babel-plugin-transform-flow-strip-types 
