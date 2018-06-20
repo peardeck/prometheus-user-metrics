@@ -1,5 +1,7 @@
 /* @flow */
 
+import type { StatsD } from 'hot-shots';
+
 import { getLabelPermutations, flattenLabels } from './util';
 import type { HistogramMetric, HistogramEvent, Label } from './util';
 
@@ -42,8 +44,9 @@ export type Histogram = {
     report: () => string
 };
 
-export function makeHistogram(config: HistogramMetric): Histogram {
+export function makeHistogram(config: HistogramMetric, statsdClient: StatsD): Histogram {
     const { name, help, type } = config;
+    const client = statsdClient;
 
     const allowedLabelPermutations = getLabelPermutations(config.labels);
 
@@ -79,6 +82,12 @@ export function makeHistogram(config: HistogramMetric): Histogram {
             } else {
                 console.log(`Disallowed label permutation ${labelPermutationKey}`);
             }
+        },
+
+        recordStatsd(event: HistogramEvent) {
+            event.observations.forEach((observation) => {
+                client.histogram(name, observation, event.labels);
+            })
         },
 
         report() {

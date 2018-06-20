@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import StatsD from 'hot-shots';
 
 import { makeAggregator } from './makeMetricsAggregator';
 import { readMetricConfigs } from './readMetricConfigs';
@@ -7,7 +8,15 @@ import { readMetricConfigs } from './readMetricConfigs';
 readMetricConfigs().then((metricConfigs) => {
     
 
-    const aggregator = makeAggregator(metricConfigs);
+    const statsdClient = new StatsD({
+        useDefaultRoute: true,
+        prefix: 'user_metrics',
+        errorHandler: function (error) {
+            console.error("Statsd socket error: ", error);
+        }
+    });
+    
+    const aggregator = makeAggregator(metricConfigs, statsdClient);
     
     // expose this publicServer to users so they can download the client & 
     // post metrics to be aggregated.

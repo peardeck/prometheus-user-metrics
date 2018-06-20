@@ -1,5 +1,7 @@
 /* @flow */
 
+import type { StatsD } from "hot-shots";
+
 import { getLabelPermutations, flattenLabels } from './util';
 import type { CounterMetric, CounterEvent } from './util';
 
@@ -8,8 +10,10 @@ export type Counter = {
     report: () => string,
 };
 
-export function makeCounter(config: CounterMetric) : Counter {
+export function makeCounter(config: CounterMetric, statsdClient: StatsD) : Counter {
     const { name, help, type } = config;
+    const client = statsdClient;
+
 
     const allowedLabelPermutations = getLabelPermutations(config.labels);
     const counterValues = {};
@@ -30,6 +34,10 @@ export function makeCounter(config: CounterMetric) : Counter {
             } else {
                 console.log(`Disallowed label permutation ${labelPermutationKey}`);
             }
+        },
+
+        recordStatsd(event: CounterEvent) {
+            client.increment(name, event.inc, event.labels);
         },
 
         report() {
