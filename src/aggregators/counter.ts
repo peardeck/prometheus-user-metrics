@@ -18,7 +18,8 @@ export function makeCounter(
   config: ICounterMetric,
   statsdClient: StatsD
 ): ICounter {
-  const { name, help, type, protocol } = config;
+  const { help, type, protocol } = config;
+  const name = `${protocol}.${config.name}`;
   const client = statsdClient;
 
   const allowedLabelPermutations = getLabelPermutations(config.labels);

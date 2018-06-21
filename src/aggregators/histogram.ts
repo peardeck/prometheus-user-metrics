@@ -69,7 +69,8 @@ export function makeHistogram(
   config: IHistogramMetric,
   statsdClient: StatsD
 ): IHistogram {
-  const { name, help, type, protocol } = config;
+  const { help, type, protocol } = config;
+  const name = `${protocol}.${config.name}`;
   const client = statsdClient;
 
   const allowedLabelPermutations = getLabelPermutations(config.labels);
