@@ -59,14 +59,22 @@ export function makeCounter(
     },
 
     report() {
-      const headerLines = [`# HELP ${name} ${help}`, `# TYPE ${name} ${type}`];
+      if (protocol === "prometheus") {
+        const headerLines = [
+          `# HELP ${name} ${help}`,
+          `# TYPE ${name} ${type}`
+        ];
 
-      const bodyLines = Object.keys(counterValues).map(labelPermutationKey => {
-        const value = counterValues[labelPermutationKey];
-        return `${name}{${labelPermutationKey}} ${value}`;
-      });
+        const bodyLines = Object.keys(counterValues).map(
+          labelPermutationKey => {
+            const value = counterValues[labelPermutationKey];
+            return `${name}{${labelPermutationKey}} ${value}`;
+          }
+        );
 
-      return headerLines.join("\n") + "\n" + bodyLines.join("\n");
+        return headerLines.join("\n") + "\n" + bodyLines.join("\n");
+      }
+      return "";
     }
   };
 }

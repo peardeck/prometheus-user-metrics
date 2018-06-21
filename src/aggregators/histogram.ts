@@ -128,20 +128,26 @@ export function makeHistogram(
     },
 
     report() {
-      const headerLines = [`# HELP ${name} ${help}`, `# TYPE ${name} ${type}`];
+      if (protocol === "prometheus") {
+        const headerLines = [
+          `# HELP ${name} ${help}`,
+          `# TYPE ${name} ${type}`
+        ];
 
-      const bodyLines = Object.keys(mapOfAggregates).map(
-        labelPermutationKey => {
-          const aggregate = mapOfAggregates[labelPermutationKey];
-          return printObservationAggregate(
-            name,
-            labelPermutationKey,
-            aggregate
-          );
-        }
-      );
+        const bodyLines = Object.keys(mapOfAggregates).map(
+          labelPermutationKey => {
+            const aggregate = mapOfAggregates[labelPermutationKey];
+            return printObservationAggregate(
+              name,
+              labelPermutationKey,
+              aggregate
+            );
+          }
+        );
 
-      return headerLines.join("\n") + "\n" + bodyLines.join("\n");
+        return headerLines.join("\n") + "\n" + bodyLines.join("\n");
+      }
+      return "";
     }
   };
 }
