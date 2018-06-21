@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es5",
+      "es6",
+      "es2016",
+      "dom",
+      "dom.iterable",
+      "esnext.asynciterable"
+    ],
+    "outDir": "./lib/",
+    "sourceMap": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "target": "es5",
+    "declaration": true,
+    "removeComments": false,
+    "noImplicitAny": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUnusedLocals": false,
+    "pretty": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "defaultSeverity": "error",
+  "extends": [
+    "tslint:recommended",
+    "tslint-config-airbnb",
+    "tslint-config-prettier"
+  ],
+  "jsRules": {},
+  "rules": {
+    "prettier": true,
+    "object-shorthand-properties-first": false,
+    "object-literal-sort-keys": false,
+    "no-unused-variable": true,
+    "no-console": false,
+    "array-type": [
+      true,
+      "array"
+    ],
+    "import-name": [
+      true,
+      {
+        "lodash": "_"
+      }
+    ]
+  },
+  "rulesDirectory": [
+    "tslint-plugin-prettier"
+  ]
+}
