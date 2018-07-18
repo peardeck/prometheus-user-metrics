@@ -117,7 +117,6 @@ const allowedMetrics: MetricsConfig = [
           "https://multiplexer-paid.datacamp.com"
         ]
       },
-      ,
       {
         name: "language",
         allowedValues: ["r", "revo", "sql", "python", "shell"]
