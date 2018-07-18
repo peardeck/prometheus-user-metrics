@@ -73,7 +73,73 @@ const allowedMetrics: MetricsConfig = [
     labels: [
       {
         name: "appName",
-        allowedValues: ["campus-app"]
+        allowedValues: ["campus-app", "projects"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "le_time_to_submit_task",
+    help: "measures the time to submit a task and get the response",
+    type: "histogram",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["projects"]
+      },
+      {
+        name: "multiplexerUrl",
+        allowedValues: [
+          "https://multiplexer-prod.datacamp.com",
+          "https://multiplexer-paid.datacamp.com"
+        ]
+      },
+      {
+        name: "language",
+        allowedValues: ["r", "revo", "sql", "python", "shell"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "le_count_timeouts",
+    help: "Count the number of timeouts",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["projects"]
+      },
+      {
+        name: "multiplexerUrl",
+        allowedValues: [
+          "https://multiplexer-prod.datacamp.com",
+          "https://multiplexer-paid.datacamp.com"
+        ]
+      },
+      ,
+      {
+        name: "language",
+        allowedValues: ["r", "revo", "sql", "python", "shell"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "le_count_crashed_notebooks",
+    help: "Count the number of notebooks that crashed",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["projects"]
+      },
+      {
+        name: "multiplexerUrl",
+        allowedValues: [
+          "https://multiplexer-prod.datacamp.com",
+          "https://multiplexer-paid.datacamp.com"
+        ]
       }
     ],
     protocol: "statsd"
