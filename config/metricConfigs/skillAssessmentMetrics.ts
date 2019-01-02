@@ -11,6 +11,7 @@ const allowedMetrics: MetricsConfig = [
         allowedValues: ['skill-assessment'],
       },
     ],
+    protocol: 'statsd',
   },
 ];
 
