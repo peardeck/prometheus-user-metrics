@@ -1,3 +1,4 @@
-import learnMetrics from "./learnMetrics";
+import learnMetrics from './learnMetrics';
+import skillAssessmentMetrics from './skillAssessmentMetrics';
 
-export default [...learnMetrics];
+export default [...learnMetrics, ...skillAssessmentMetrics];
