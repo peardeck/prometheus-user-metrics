@@ -1,74 +1,41 @@
-version: 2
-jobs:
-  build:
-    environment:
-      SERVICE: prometheus-aggregator
-    docker:
-      - image: ${STAGING_ECR_URL}/docker-deploy
-        aws_auth: &ecr_credentials
-          aws_access_key_id: $STAGING_AWS_ACCESS_KEY_ID
-          aws_secret_access_key: $STAGING_AWS_SECRET_ACCESS_KEY
-    steps:
-      - checkout
-      - setup_remote_docker
-      - run:
-          name: Build application docker image
-          command: |
-            docker build --build-arg NPM_TOKEN=${NPM_TOKEN} -t ${STAGING_ECR_URL}/${SERVICE}:${CIRCLE_SHA1} .
-      - run:
-          name: Push image
-          command: |
-            ENVIRONMENT=staging DOCKER_IMAGE="${STAGING_ECR_URL}/${SERVICE}" TAG=${CIRCLE_SHA1} /docker-push.sh
-  deploy:
-    environment:
-      SERVICE: prometheus-aggregator
-      CONTAINER_IMAGE: prometheus-aggregator
-      ENVIRONMENT: staging
-      DESIRED_COUNT: "1"
-      CLUSTER: datacamp-services
-    docker:
-      - image: ${STAGING_ECR_URL}/docker-deploy
-        aws_auth: *ecr_credentials
-    steps:
-      - checkout
-      - deploy:
-          name: Deploy
-          command: |
-            /ecs-deploy.sh
-  deploy-to-prod:
-    environment:
-      SERVICE: prometheus-aggregator
-      CONTAINER_IMAGE: prometheus-aggregator
-      ENVIRONMENT: prod
-      DESIRED_COUNT: "2"
-      CLUSTER: datacamp-services
-    docker:
-      - image: ${STAGING_ECR_URL}/docker-deploy
-        aws_auth: *ecr_credentials
-    steps:
-      - checkout
-      - setup_remote_docker
-      - deploy:
-          name: Deploy to prod
-          command: |
-            DOCKER_IMAGE="${PROD_ECR_URL}/${SERVICE}" TAG=${CIRCLE_SHA1} /docker-push.sh
-            /ecs-deploy.sh
+version: 2.1
+orbs:
+  datacamp-ecr: datacamp/ecr@0.0.13
+  datacamp-deploy: datacamp/deploy@0.0.30
 workflows:
-  version: 2
+  version: 2.1
   build_test_deploy:
     jobs:
-      - build:
+      - datacamp-ecr/build_and_push_image_to_ecr:
+          name: build
           context: org-global
-      - deploy:
+          aws-access-key-id: $STAGING_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: $STAGING_AWS_SECRET_ACCESS_KEY
+          account-url: $STAGING_ECR_URL
+          extra-docker-args: "--build-arg NPM_TOKEN=${NPM_TOKEN}"
+      - datacamp-deploy/deploy: # Staging
           context: org-global
           requires:
             - build
+          ecs-deploy-url: $STAGING_DEPLOY_URL
+          ecs-deploy-password: $STAGING_ECS_DEPLOY_PASSWORD
           filters:
             branches:
               only:
                 - master
-      - deploy-to-prod:
+      - datacamp-ecr/pull_push_to_account:
           context: org-global
+          filters:
+            tags:
+              only: /^release-.*/
+            branches:
+              ignore: /.*/
+      - datacamp-deploy/deploy: # Production
+          context: org-global
+          requires:
+            - datacamp-ecr/pull_push_to_account
+          ecs-deploy-url: $PROD_DEPLOY_URL
+          ecs-deploy-password: $PROD_ECS_DEPLOY_PASSWORD
           filters:
             tags:
               only: /^release-.*/

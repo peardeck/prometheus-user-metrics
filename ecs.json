@@ -1,11 +1,12 @@
 {
-  "cluster": "${CLUSTER}",
+  "cluster": "datacamp-services",
+  "serviceName": "prometheus-aggregator",
   "servicePort": 3000,
   "serviceProtocol": "HTTP",
-  "desiredCount": ${DESIRED_COUNT},
+  "desiredCount": 1,
   "containers": [
     {
-      "containerName": "${SERVICE}",
+      "containerName": "prometheus-aggregator",
       "containerImage": "${CONTAINER_IMAGE}",
       "containerTag": "${CIRCLE_SHA1}",
       "containerPort": 3000,
@@ -17,22 +18,15 @@
         "com.datadoghq.ad.init_configs": "[{}]",
         "com.datadoghq.ad.instances": "[{\"prometheus_url\": \"http://%%host%%:9102/metrics\", \"namespace\": \"user_metrics\", \"metrics\": [\"*\"], \"send_histograms_buckets\": true}]",
         "com.datadoghq.ad.logs": "[{}]"
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:3000/status || exit 1"
+        ],
+        "interval": 60,
+        "startPeriod": 120
       }
-    }
-  ],
-  "healthCheck": {
-    "healthyThreshold": 3,
-    "unhealthyThreshold": 5,
-    "path": "/status",
-    "interval": 20,
-    "matcher": "200"
-  },
-  "ruleConditions": [
-    {
-      "hostname": "prometheus-aggregator",
-      "listeners": [
-        "https"
-      ]
     }
   ]
 }
