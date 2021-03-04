@@ -142,6 +142,30 @@ const allowedMetrics: MetricsConfig = [
       }
     ],
     protocol: "statsd"
+  },
+  {
+    name: "count_failed_auth_call",
+    help: "Count the number of failed authentication calls",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["campus-app"]
+      },
+      {
+        name: "status_code",
+        allowedValues: ["none", "200", "400", "403", "404", "500", "502", "503", "504", "untracked"]
+      },
+      {
+        name: "timeout",
+        allowedValues: ["true", "false"]
+      },
+      {
+        name: "attempt",
+        allowedValues: ["1", "2"]
+      },
+    ],
+    protocol: "statsd"
   }
 ];
 
