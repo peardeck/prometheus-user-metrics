@@ -1,7 +1,7 @@
 version: 2.1
 orbs:
-  datacamp-ecr: datacamp/ecr@0.0.13
-  datacamp-deploy: datacamp/deploy@0.0.30
+  datacamp-ecr: datacamp/ecr@0
+  datacamp-deploy: datacamp/deploy@1
 workflows:
   version: 2.1
   build_test_deploy:
@@ -13,16 +13,20 @@ workflows:
           aws-secret-access-key: $STAGING_AWS_SECRET_ACCESS_KEY
           account-url: $STAGING_ECR_URL
           extra-docker-args: "--build-arg NPM_TOKEN=${NPM_TOKEN}"
+
       - datacamp-deploy/deploy: # Staging
+          name: deploy-staging
           context: org-global
+          new-deploy-opt-in: true
+          deploy-url: $STAGING_LAMBDA_DEPLOY_URL
+          deploy-password: $STAGING_LAMBDA_DEPLOY_PASSWORD
           requires:
             - build
-          ecs-deploy-url: $STAGING_DEPLOY_URL
-          ecs-deploy-password: $STAGING_ECS_DEPLOY_PASSWORD
           filters:
             branches:
               only:
                 - master
+
       - datacamp-ecr/pull_push_to_account:
           context: org-global
           filters:
@@ -30,12 +34,15 @@ workflows:
               only: /^release-.*/
             branches:
               ignore: /.*/
+
       - datacamp-deploy/deploy: # Production
+          name: deploy-production
           context: org-global
+          new-deploy-opt-in: true
+          deploy-url: $PROD_LAMBDA_DEPLOY_URL
+          deploy-password: $PROD_LAMBDA_DEPLOY_PASSWORD
           requires:
             - datacamp-ecr/pull_push_to_account
-          ecs-deploy-url: $PROD_DEPLOY_URL
-          ecs-deploy-password: $PROD_ECS_DEPLOY_PASSWORD
           filters:
             tags:
               only: /^release-.*/
