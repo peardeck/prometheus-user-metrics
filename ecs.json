@@ -7,8 +7,7 @@
       "containers": [
         {
           "containerName": "prometheus-aggregator",
-          "containerImage": "${CONTAINER_IMAGE}",
-          "containerTag": "${CIRCLE_SHA1}",
+          "containerURI": "708371444347.dkr.ecr.us-east-1.amazonaws.com/prometheus-user-metrics:${CIRCLE_SHA1}",
           "containerPort": 3000,
           "memoryReservation": 256,
           "cpu": 700,
