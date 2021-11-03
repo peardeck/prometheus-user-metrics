@@ -13,6 +13,18 @@ const allowedMetrics: MetricsConfig = [
     ],
     protocol: "statsd"
   },
+  {
+    name: "workspace_count_crashed_sessions",
+    help: "The amount of sessions that crashed",
+    type: "counter",
+    labels: [
+      {
+        name: "editor",
+        allowedValues: ["JupyterLab", "RStudio"]
+      }
+    ],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
