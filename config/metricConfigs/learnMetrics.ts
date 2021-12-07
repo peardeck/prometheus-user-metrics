@@ -166,6 +166,42 @@ const allowedMetrics: MetricsConfig = [
       },
     ],
     protocol: "statsd"
+  },
+  {
+    name: "learn_hub__time_to_interactive_dashboard_threshold",
+    help: "Count the number of page loads under the threshold",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn"]
+      },
+      {
+        name: "pageName",
+        allowedValues: ["dashboard"]
+      },
+      {
+        name: "underThreshold",
+        allowedValues: ["true", "false"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "learn_hub__time_to_interactive_dashboard",
+    help: "Measure the time to interactive on the learn hub dashboard",
+    type: "histogram",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn"]
+      },
+      {
+        name: "pageName",
+        allowedValues: ["dashboard"]
+      },
+    ],
+    protocol: "statsd"
   }
 ];
 
