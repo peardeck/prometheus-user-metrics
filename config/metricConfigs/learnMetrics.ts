@@ -169,7 +169,7 @@ const allowedMetrics: MetricsConfig = [
   },
   {
     name: "learn_hub__time_to_initial_dashboard_load",
-    help: "Measure the time to interactive on the learn hub dashboard",
+    help: "Measure the time to initial data load on the learn hub dashboard",
     type: "histogram",
     labels: [
       {
