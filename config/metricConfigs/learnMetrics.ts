@@ -168,7 +168,7 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
-    name: "learn_hub__time_to_interactive_dashboard_threshold",
+    name: "learn_hub__time_to_initial_dashboard_load_threshold",
     help: "Count the number of page loads under the threshold",
     type: "counter",
     labels: [
@@ -188,7 +188,7 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
-    name: "learn_hub__time_to_interactive_dashboard",
+    name: "learn_hub__time_to_initial_dashboard_load",
     help: "Measure the time to interactive on the learn hub dashboard",
     type: "histogram",
     labels: [
