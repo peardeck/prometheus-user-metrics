@@ -186,6 +186,26 @@ const allowedMetrics: MetricsConfig = [
       },
     ],
     protocol: "statsd"
+  },
+  {
+    name: "learn_hub__widget_loaded",
+    help: "Count the widgets loaded on the learn hub dashboard and notify of any errors",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn"]
+      },
+      {
+        name: "status",
+        allowedValues: ["success", "failure"]
+      },
+      {
+        name: "widgetName",
+        allowedValues: ["StreaksWidget", "CoursesWidget", "PracticeWidget", "ProjectWidget", "SitewidePromoWidget", "TopAdWidget", "AssessmentWidget", "MyCoursesWidget", "SecondaryAlpaWidget"]
+      },
+    ],
+    protocol: "statsd"
   }
 ];
 
