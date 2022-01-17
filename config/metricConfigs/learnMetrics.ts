@@ -209,7 +209,7 @@ const allowedMetrics: MetricsConfig = [
   },
   {
     name: "competitions__time_to_initial_page_load",
-    help: "Measure the time to initial data load on the competitions pages",
+    help: "Measure the time for competitions explore page load",
     type: "histogram",
     labels: [
       {
@@ -218,7 +218,27 @@ const allowedMetrics: MetricsConfig = [
       },
       {
         name: "pageName",
-        allowedValues: ["explorePage, detailsPage, workspacePage"]
+        allowedValues: ["explorePage"]
+      },
+      {
+        name: "underThreshold",
+        allowedValues: ["true", "false"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "competitions__time_to_entries_page_load",
+    help: "Measure the time for competitions details page load",
+    type: "histogram",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn/competitions"]
+      },
+      {
+        name: "pageName",
+        allowedValues: ["detailsPage"]
       },
       {
         name: "underThreshold",
