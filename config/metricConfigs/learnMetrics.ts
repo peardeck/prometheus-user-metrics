@@ -206,7 +206,27 @@ const allowedMetrics: MetricsConfig = [
       },
     ],
     protocol: "statsd"
-  }
+  },
+  {
+    name: "competitions__time_to_initial_page_load",
+    help: "Measure the time to initial data load on the competitions pages",
+    type: "histogram",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn/competitions"]
+      },
+      {
+        name: "pageName",
+        allowedValues: ["explorePage, detailsPage, workspacePage"]
+      },
+      {
+        name: "underThreshold",
+        allowedValues: ["true", "false"]
+      },
+    ],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
