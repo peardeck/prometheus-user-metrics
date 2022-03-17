@@ -25,6 +25,18 @@ const allowedMetrics: MetricsConfig = [
     ],
     protocol: "statsd"
   },
+  {
+    name: "workspace_time_to_initial_content_render",
+    help: "measures the time to render any content of a workspace",
+    type: "histogram",
+    labels: [
+      {
+        name: "navigationType",
+        allowedValues: ["unknown", "initial", "client-side"]
+      }
+    ],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
