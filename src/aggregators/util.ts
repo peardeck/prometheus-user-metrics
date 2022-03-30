@@ -31,7 +31,12 @@ export type IHistogramMetric =
   | IHistogramMetricPrometheus
   | IHistogramMetricStatsd;
 
-export type MetricConfig = ICounterMetric | IHistogramMetric;
+export interface IDistributionMetric extends IMetric {
+  type: "distribution";
+  protocol: "statsd";
+}
+
+export type MetricConfig = ICounterMetric | IHistogramMetric | IDistributionMetric;
 
 export type MetricsConfig = MetricConfig[];
 
@@ -44,6 +49,13 @@ export interface ICounterEvent {
 
 export interface IHistogramEvent {
   metricType: "histogram";
+  metricName: string;
+  labels: { [key: string]: string };
+  observations: number[];
+}
+
+export interface IDistributionEvent {
+  metricType: "distribution";
   metricName: string;
   labels: { [key: string]: string };
   observations: number[];

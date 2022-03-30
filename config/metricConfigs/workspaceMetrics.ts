@@ -28,7 +28,7 @@ const allowedMetrics: MetricsConfig = [
   {
     name: "workspace_time_to_initial_content_render",
     help: "measures the time to render any content of a workspace",
-    type: "histogram",
+    type: "distribution",
     labels: [
       {
         name: "navigationType",
