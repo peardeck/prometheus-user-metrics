@@ -26,7 +26,7 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
-    name: "workspace_time_to_initial_content_render",
+    name: "workspace_time_to_initial_content_render_start",
     help: "measures the time to render any content of a workspace",
     type: "distribution",
     labels: [
