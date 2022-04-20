@@ -9,6 +9,34 @@ const allowedMetrics: MetricsConfig = [
       {
         name: "editor",
         allowedValues: ["JupyterLab", "RStudio"]
+      },
+      {
+        name: "editorType",
+        allowedValues: ["iframeEditor", "dcStudioEditor"]
+      },
+      {
+        name: "workspaceState",
+        allowedValues: ["unknown", "new", "existing"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "workspace_time_to_session_ready_for_editor_start",
+    help: "measures the time between session started and editor loaded",
+    type: "distribution",
+    labels: [
+      {
+        name: "editor",
+        allowedValues: ["JupyterLab", "RStudio"]
+      },
+      {
+        name: "editorType",
+        allowedValues: ["iframeEditor", "dcStudioEditor"]
+      },
+      {
+        name: "workspaceState",
+        allowedValues: ["unknown", "new", "existing"]
       }
     ],
     protocol: "statsd"
@@ -33,6 +61,10 @@ const allowedMetrics: MetricsConfig = [
       {
         name: "navigationType",
         allowedValues: ["unknown", "initial", "client-side"]
+      },
+      {
+        name: "workspaceState",
+        allowedValues: ["unknown", "new", "existing"]
       }
     ],
     protocol: "statsd"
