@@ -37,6 +37,18 @@ const allowedMetrics: MetricsConfig = [
     ],
     protocol: "statsd"
   },
+  {
+    name: "workspace_count_show_limit_cpu_ram_usage",
+    help: "the amount of times users were shown the CPU/RAM limit usage banner in a workspace",
+    type: "counter",
+    labels: [
+      {
+        name: "resource",
+        allowedValues: ["CPU", "RAM"]
+      }
+    ],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
