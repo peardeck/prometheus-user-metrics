@@ -65,6 +65,10 @@ const allowedMetrics: MetricsConfig = [
       {
         name: "workspaceState",
         allowedValues: ["unknown", "new", "existing"]
+      },
+      {
+        name: "experimentalSyncBackend",
+        allowedValues: ["true", "false"]
       }
     ],
     protocol: "statsd"
