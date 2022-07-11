@@ -202,7 +202,7 @@ const allowedMetrics: MetricsConfig = [
       },
       {
         name: "widgetName",
-        allowedValues: ["StreaksWidget", "CoursesWidget", "PracticeWidget", "ProjectWidget", "SitewidePromoWidget", "TopAdWidget", "AssessmentWidget", "MyCoursesWidget", "SecondaryAlpaWidget"]
+        allowedValues: ["StreaksWidget", "CoursesWidget", "PracticeWidget", "ProjectWidget", "AssessmentWidget", "MyCoursesWidget", "SecondaryAlpaWidget"]
       },
     ],
     protocol: "statsd"
@@ -263,6 +263,26 @@ const allowedMetrics: MetricsConfig = [
       {
         name: "underThreshold",
         allowedValues: ["true", "false"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "learn_hub__ad_loaded",
+    help: "Count the ads loaded on the learn hub dashboard and notify of any errors",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["/learn"]
+      },
+      {
+        name: "status",
+        allowedValues: ["success", "failure"]
+      },
+      {
+        name: "widgetName",
+        allowedValues: ["SitewidePromoWidget", "TopAdWidget"]
       },
     ],
     protocol: "statsd"
