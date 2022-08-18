@@ -54,6 +54,33 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
+    name: "workspace_count_restart_sessions",
+    help: "The amount of sessions that restarted in DCStudio",
+    type: "counter",
+    labels: [
+      {
+        name: "mode",
+        allowedValues: ["executing", "viewing", "editing"]
+      },
+      {
+        name: "reason",
+        allowedValues: [
+          "unknown",
+          "loading",
+          "no-saving",
+          "not-allowed",
+          "offline",
+          "context-not-ready",
+          "kernel-broken",
+          "no-context",
+          "no-kernel",
+          "session-broken"
+        ]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
     name: "workspace_time_to_initial_content_render_start",
     help: "measures the time to render any content of a workspace",
     type: "distribution",
