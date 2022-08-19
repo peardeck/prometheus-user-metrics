@@ -13,9 +13,10 @@
   "dependencies": {
     "body-parser": "^1.17.0",
     "express": "^4.15.0",
-    "hot-shots": "5.6.3",
+    "hot-shots": "6.3.0",
     "ts-node": "6.1.2",
-    "typescript": "2.9.2"
+    "typescript": "2.9.2",
+    "unix-dgram": "2.0.4"
   },
   "devDependencies": {
     "@types/express": "4.16.0",

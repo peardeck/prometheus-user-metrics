@@ -5,12 +5,24 @@ import { StatsD } from "hot-shots";
 import metricConfigs from "../config/metricConfigs";
 import { makeAggregator } from "./makeMetricsAggregator";
 
+const statsdSock = process.env["DD_DOGSTATSD_SOCKET"];
+let extraOptions = {};
+
+if (statsdSock !== undefined) {
+  extraOptions = {
+    ...extraOptions,
+    path: statsdSock,
+    protocol: "uds",
+  };
+}
+
 const statsdClient = new StatsD({
+  ...extraOptions,
   useDefaultRoute: true,
   prefix: "user_metrics.",
-  errorHandler: error => {
+  errorHandler: (error) => {
     console.log("Statsd socket error: ", error);
-  }
+  },
 });
 
 const aggregator = makeAggregator(metricConfigs, statsdClient);
