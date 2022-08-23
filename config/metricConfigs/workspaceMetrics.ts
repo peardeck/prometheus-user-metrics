@@ -101,6 +101,27 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
+    name: "workspace_time_to_load_dashboard",
+    help: "measures the time to render completely the dashboard",
+    type: "distribution",
+    labels: [],
+    protocol: "statsd"
+  },
+  {
+    name: "workspace_time_to_load_publication",
+    help: "measures the time to render completely a publication",
+    type: "distribution",
+    labels: [],
+    protocol: "statsd"
+  },
+  {
+    name: "workspace_time_to_load_editor",
+    help: "measures the time to render the first cell in DCStudio",
+    type: "distribution",
+    labels: [],
+    protocol: "statsd"
+  },
+  {
     name: "workspace_count_show_limit_cpu_ram_usage",
     help: "the amount of times users were shown the CPU/RAM limit usage banner in a workspace",
     type: "counter",
