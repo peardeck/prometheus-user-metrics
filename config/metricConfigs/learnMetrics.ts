@@ -287,6 +287,82 @@ const allowedMetrics: MetricsConfig = [
     ],
     protocol: "statsd"
   },
+  {
+    name: "campus__time_to_vm_session_load",
+    help: "Measure the time for vm session to load",
+    type: "histogram",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["campus-app"]
+      },
+      {
+        name: "technology",
+        allowedValues: ["powerbi", "tableau", "other"]
+      },
+      {
+        name: "underThreshold",
+        allowedValues: ["true", "false"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "campus__vm_session_disconnect",
+    help: "Count the vm session disconnects using exercise library",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["campus-app"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "campus__vm_session_death",
+    help: "Count the vm session deaths using exercise library",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["campus-app"]
+      },
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "campus__multiplexer_session_crash",
+    help: "Count the number of multiplexer sessions that crashed",
+    type: "counter",
+    labels: [
+      {
+        name: "appName",
+        allowedValues: ["campus-app"]
+      },
+      {
+        name: "errorCode",
+        allowedValues: [
+          "ActivityReadTimeout",
+          "ActivityTimeout",
+          "ActivityWriteTimeout",
+          "CodeTimedOut",
+          "DockerCrashed",
+          "DockerFailedToRun",
+          "Expired",
+          "ExplicitlyStopped",
+          "FailedToGetSession",
+          "InitCodeTimedOut",
+          "NotUsed",
+          "OtherSessionRequested",
+          "OtherSessionStarted",
+          "ReplClosed",
+          "WrongSessionType",
+        ]
+      },
+    ],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
