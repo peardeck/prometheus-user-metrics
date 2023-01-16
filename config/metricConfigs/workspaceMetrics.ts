@@ -101,6 +101,54 @@ const allowedMetrics: MetricsConfig = [
     protocol: "statsd"
   },
   {
+    name: "workspace_cpu_usage",
+    help: "measures the cpu usage of a workspace",
+    type: "distribution",
+    labels: [
+      {
+        name: "accountReferenceType",
+        allowedValues: ["group", "personal"]
+      },
+      {
+        name: "isPremium",
+        allowedValues: ["true", "false"]
+      },
+      {
+        name: "language",
+        allowedValues: ["R", "Python"]
+      },
+      {
+        name: "sourceTag",
+        allowedValues: ["workspace", "integration", "template", "github", "project", "rdocs"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
+    name: "workspace_ram_usage",
+    help: "measures the ram usage of a workspace",
+    type: "distribution",
+    labels: [
+      {
+        name: "accountReferenceType",
+        allowedValues: ["group", "personal"]
+      },
+      {
+        name: "isPremium",
+        allowedValues: ["true", "false"]
+      },
+      {
+        name: "language",
+        allowedValues: ["R", "Python"]
+      },
+      {
+        name: "sourceTag",
+        allowedValues: ["workspace", "integration", "template", "github", "project", "rdocs"]
+      }
+    ],
+    protocol: "statsd"
+  },
+  {
     name: "workspace_time_to_load_dashboard",
     help: "measures the time to render completely the dashboard",
     type: "distribution",
