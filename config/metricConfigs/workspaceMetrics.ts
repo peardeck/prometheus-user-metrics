@@ -114,6 +114,10 @@ const allowedMetrics: MetricsConfig = [
         allowedValues: ["true", "false"]
       },
       {
+        name: "isNotebookRunning",
+        allowedValues: ["true", "false"]
+      },
+      {
         name: "language",
         allowedValues: ["R", "Python"]
       },
@@ -135,6 +139,10 @@ const allowedMetrics: MetricsConfig = [
       },
       {
         name: "isPremium",
+        allowedValues: ["true", "false"]
+      },
+      {
+        name: "isNotebookRunning",
         allowedValues: ["true", "false"]
       },
       {
