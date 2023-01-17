@@ -363,6 +363,20 @@ const allowedMetrics: MetricsConfig = [
     ],
     protocol: "statsd"
   },
+  {
+    name: "le_count_exercise_session_ready",
+    help: "Count the number of multiplexer sessions that started",
+    type: "counter",    
+    labels: [],
+    protocol: "statsd"
+  },
+  {
+    name: "le_count_exercise_start",
+    help: "Count the number of exercises started",
+    type: "counter",    
+    labels: [],
+    protocol: "statsd"
+  },
 ];
 
 export default allowedMetrics;
